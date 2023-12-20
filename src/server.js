@@ -1,6 +1,7 @@
 // Viết các cấu hình của server vào trong đây
 
-const express = require('express');
+// const express = require('express');
+import express from 'express';
 
 const app = express();
 

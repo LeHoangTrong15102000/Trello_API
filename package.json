@@ -1,5 +1,6 @@
 {
   "name": "Backend_Trello_API",
+  "type": "module",
   "version": "1.0.0",
   "description": "hoangtrongdev mern stack",
   "main": "src/server.js",
