@@ -1,0 +1,12 @@
+{
+  "name": "Backend_Trello_API",
+  "version": "1.0.0",
+  "description": "hoangtrongdev mern stack",
+  "main": "src/server.js",
+  "author": "hoangtrongdev",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
