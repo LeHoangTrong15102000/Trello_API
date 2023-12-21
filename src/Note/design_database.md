@@ -20,11 +20,26 @@
 
 - Khi mà làm trong `mock-data` thì chúng ta `Embedded` để cho dễ dàng xử lý -> Còn khi lên `Database` rồi thì chúng ta phải tách ra -> Và viết các cái `đầu API` sau khi chúng ta trả về cho người dùng (FE) thì chúng ta cần `gộp dữ liệu như (Embedded ở mock-data)` sao cho chuẩn như ở `mock-data` -> Để mà `FE` có thể sử dụng được -> Là nó sẽ qua `kha khá` bước xử lý -> Và dĩ nhiên chúng ta sẽ học được nhiều `kiến thức` từ những bước xử lý đó
 
+## Vấn đề về JOIN dữ liệu - QUAN TRỌNG
+
+- Vấn đề về `Populate` và `Lookup` -> Khi query lấy dữ liệu trong `cơ sở dữ liệu` ra không phải lúc nào cũng dữ liệu từ `một bảngg` - `một collection` mà phải lấy dữ liệu từ `2 3 collection` trở lên -> Khi lấy như vậy nó gọi là `JOIN`
+  - Khi sử dụng với `Mongoose` thì chúng ta phải sử dụng `Populate`
+  - Khi sử dụng với `MongoDB driver` thì chúng ta phải sử dụng `Lookup`
+
 ## Collection board
 
 ```ts
 interface Board {
-  _id: String(require)
+  _id: String(required)
+  description: String(required)
+  title: String(required, min, max)
+  type: String(required)
+  ownerIds: Array of Ids <Default: []>
+  memberIds: Array of Ids <Default: []>
+  columnOrderIds: Array of Ids <Default: []>
+  createdAt: Timestamp <Default: Date.now>
+  updatedAt: Timestamp <Default: null>
+  _destroy: Boolean <Default: false>
 }
 ```
 
@@ -32,7 +47,13 @@ interface Board {
 
 ```ts
 interface Column {
-  _id: String(require)
+  _id: String(required)
+  boardId: String(required)
+  title: String(required, min, max)
+  cardOrderIds: Array of Ids <Default: []>
+  createdAt: Timestamp <Default: Date.now>
+  updatedAt: Timestamp <Default: null>
+  _destroy: Boolean <Default: false>
 }
 ```
 
@@ -40,7 +61,33 @@ interface Column {
 
 ```ts
 interface Card {
-  _id: String(require)
+  _id: String (required)
+  boardId: String (required)
+  columnId: String (required)
+  title: String (required, min, max)
+  cover: String <Default: null>
+  description: String <Default: null>
+  memberIds: Array of Ids <Default: []>
+
+  comments: Array <Default: []> {
+    userId: String,
+    userEmail: String,
+    userAvatar: String,
+    userDisplayname: String,
+    content: String,
+    createdAt: Timestamp,
+  }
+
+  attachments: Array of Ids <Default: []> {
+    fileName: String,
+    fileType: String,
+    fileURL: String,
+    createdAt: Timestamp,
+  }
+
+  createdAt: Timestamp <Default: Date.now>
+  updatedAt: Timestamp <Default: null>
+  _destroy: Boolean <Default: false>
 }
 ```
 
@@ -48,7 +95,21 @@ interface Card {
 
 ```ts
 interface User {
-  _id: String(require)
+  _id: String(required)
+  email: (unique, required)
+  password: required
+  username: (unique, required) default from email
+
+  displayName: (optional) default from email
+  avatar: default from system img
+
+  role: -> setDefault (client, admin, ...vv)
+
+  isActive: Boolean <Default: false>
+  verifyToken: Random String or Null
+
+  createdAt: Timestamp <Default: Date.now>
+  updatedAt: Timestamp <Default: null>
 }
 ```
 
@@ -56,6 +117,20 @@ interface User {
 
 ```ts
 interface Invitation {
-  _id: String(require)
+  _id: String(required)
+
+  inviteId: ObjectId (required)
+  inviteeId: ObjectId (required)
+  type: String (required)
+
+  boardInvatation: Json Object {
+    boardId: String (optional),
+    status: String (optional)
+  }
+
+  createdAt: Timestamp <Default: Date.now>
+  updatedAt: Timestamp <Default: null>
+  _destroy: Boolean <Default: false>
+
 }
 ```
