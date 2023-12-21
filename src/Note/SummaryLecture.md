@@ -8,6 +8,8 @@
 
 ## Tips thiết kế cơ sở dữ liệu NoSQL
 
+- Cách thiết kế cơ sở dữ liệu NoSQL sao cho chuẩn -> Học cách thiết kế chuẩn khi đi làm thực tế luôn
+
 ## MongoDB và Mongoose - Đừng nhầm lẫn nữa
 
 ## MongoDB Atlas Cloud Database - Nên dùng hay không ?
