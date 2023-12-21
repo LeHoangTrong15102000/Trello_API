@@ -124,7 +124,7 @@ interface Invitation {
   type: String (required)
 
   boardInvatation: Json Object {
-    boardId: String (optional),
+    boardId: ObjectId (optional),
     status: String (optional)
   }
 
