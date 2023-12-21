@@ -10,7 +10,11 @@
 
 - Cách thiết kế cơ sở dữ liệu NoSQL sao cho chuẩn -> Học cách thiết kế chuẩn khi đi làm thực tế luôn
 
+- Không có dự án nào mà thiết kế cơ sở dữ liệu nó hoàn hảo ngay từ đầu được -> Nên là cứ an tâm nếu trong lúc làm mà có vấn đề thì có thể sửa được -> Nhiều người vẫn cứ thiết kế nó hoàn hảo ngay từ đầu rồi mới bắt đầu code
+
 ## MongoDB và Mongoose - Đừng nhầm lẫn nữa
+
+- So sánh
 
 ## MongoDB Atlas Cloud Database - Nên dùng hay không ?
 
