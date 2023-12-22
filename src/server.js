@@ -28,12 +28,27 @@ const START_SERVER = () => {
   })
 }
 
-// Chỉ khi kết nối với Database thành công thì mới START_SERVER
-console.log('1. Connecting to MongoDB Cloud Atlas...')
-CONNECT_DB()
-  .then(() => console.log('2. Connected to MongoDB Cloud Atlas!'))
-  .then(() => START_SERVER())
-  .catch((error) => {
+;(async () => {
+  try {
+    console.log('1. Connecting to MongoDB Cloud Atlas...')
+    await CONNECT_DB()
+    console.log('2. Connected to MongoDB Cloud Atlas!')
+
+    START_SERVER()
+  } catch (error) {
     console.error(error)
-    process.exit(0) // là method mặc định của nodejs để exit cái chương trình ra thôi
-  })
+    // là method mặc định của nodejs để exit cái chương trình ra thôi
+    process.exit(0)
+  }
+})()
+
+// Chỉ khi kết nối với Database thành công thì mới START_SERVER
+// console.log('1. Connecting to MongoDB Cloud Atlas...')
+// CONNECT_DB()
+//   .then(() => console.log('2. Connected to MongoDB Cloud Atlas!'))
+//   .then(() => START_SERVER())
+//   .catch((error) => {
+//     console.error(error)
+//     // là method mặc định của nodejs để exit cái chương trình ra thôi
+//     process.exit(0)
+//   })

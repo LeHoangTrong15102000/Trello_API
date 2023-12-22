@@ -38,6 +38,8 @@
 
 - Sau này code chúng ta sẽ đi từ cái function `START_SERVER` đi ra -> Cho dù chúng ta có tách nhỏ code
 
+- Nó còn cách viết hay của cái `ConnectDB` để chúng ta có thể biết thêm -> Nó được gọi là IIFE -> Là biểu thức mà hàm khai báo sẽ được gọi ngay lập tức sau khi được định nghĩa -> Thường sẽ được khai báo trong một cặp dấu ngoặc đơn `(5)`
+
 ## Đóng kết nối MongoDB Atlas trong dự án Back-end
 
 ## Tổ chức biến môi trường ENV đúng cách
