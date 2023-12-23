@@ -4,18 +4,19 @@
  * "A bit of fragrance clings to the hand that gives flowers!"
  */
 
-const MONGODB_URI =
-  'mongodb+srv://langtupro0456:0773094710trong@cluster0-hoangtrongdev.t4eqczc.mongodb.net/?retryWrites=true&w=majority'
+// const MONGODB_URI =
+//   'mongodb+srv://langtupro0456:0773094710trong@cluster0-hoangtrongdev.t4eqczc.mongodb.net/?retryWrites=true&w=majority'
 
-const DATABASE_NAME = 'trello-hoangtrongdev-mern-stack'
+// const DATABASE_NAME = 'trello-hoangtrongdev-mern-stack'
 
 import { MongoClient, ServerApiVersion } from 'mongodb'
+import { env } from './environment'
 
 // Khởi tạo một đối tượng trelloDatabaseInstance ban đầu là null (vì chúng ta chưa connnect)
 let trelloDatabaseInstance = null
 
 // Khởi tạo một đối tượng Client Instance để connect tới MongoDB
-const mongoClientInstance = new MongoClient(MONGODB_URI, {
+const mongoClientInstance = new MongoClient(env.MONGODB_URI, {
   // Lưu ý cái serverApi có từ phiên bản MongoDB 5.0.0, có thể không cần dùng nó, còn nếu dùng nó là chúng ta sẽ chỉ định một cái Stable Api Version của MongoDB
 
   // Stable Api Version như là một kiểu của MongoDB khi có lỗi thì nó sẽ báo lỗi ngay
@@ -32,7 +33,7 @@ export const CONNECT_DB = async () => {
   await mongoClientInstance.connect()
 
   // Kết nối thành công thì lấy ra Database theo tên và gán ngược nó lại vào biến trelloDatabaseInstance
-  trelloDatabaseInstance = mongoClientInstance.db(DATABASE_NAME)
+  trelloDatabaseInstance = mongoClientInstance.db(env.DATABASE_NAME)
 }
 
 // Đóng kết nối tới Database khi cần
