@@ -74,6 +74,12 @@
 
 ## Viết API với Express Router, hiểu HTTP Status Codes
 
+- Chúng ta viết APIs thì chúng ta tập trung vào `res.json()`
+
+- Tổ chức `Router` trong dự án của chúng ta một cách `clean code` nhất có thể
+
+- Sử dụng package `Http Status Code` để quản lí status của dự án
+
 ## Sử dụng Postman để test API Back-end
 
 ## Code tầng Validation: Dùng Joi để validate dữ liệu
