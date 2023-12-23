@@ -86,6 +86,33 @@
 
 - Back-end cũng phải luôn validate dữ liệu -> Điều này là tối quan trọng trong làm việc -> Back-end đương nhiên cũng phải validate dữ liệu ở trong code luôn
 
+- Để mà validate dữ liệu thì à cái `API get List` chúng ta đang muôn validate dữ liệu từ `Request Body` của một cái form kiểu kiểu như là chúng ta làm một cái form để gửi lênn
+
+- Nay sẽ tập trung vào thằng `POST` để tạo mới một `new board` -> Thì chúng ta phải nhận dữ liệu từ phía FE gửi lên
+
+- Ở trong học phần này sẽ chỉ tập trung vào 2 thằng trong board đó là `title` và `description` -> Chúng ta sẽ tạo ra cái điều kiện để chúng ta validate dữ liệu của bên phía FE gửi lên là `title` và `description` -> Ở bắt lỗi cho `createNew` sẽ có nhiều dữ án người ta dùng mã `400` là `BAD REQUEST` cũng có nhiều thứ người ta dùng mã `422` `UNPROCESSABLE ENTITY` -> Team BE follow chuẩn trong team chúng ta làm thông thường sẽ sử dụng 422 là chuẩn rồi
+
+- Vì chúng ta dùng method `POST` để dữ liệu lên thì chúng ta phải nhận dữ liệu từ phía BE thông qua một thứ là `req.body` -> truyền `req.body` vào `validateAsync` -> `await correctCondition.validateAsync(req.body)` -> Để nó kiểm tra `req.body` rằng cái dữ liệu từ phía FE gửi đi nó có phù hợp với cái điều kiện chúng ta validate hay không `correctCondition` -> Sau cùng là thực hiện hàm `next()` để đưa cái `request` của chúng ta sang một `tầng` xử lý mới ở phía `Back-end`
+
+- Cần phải cho phép 1 cái `express.json()` đề có thể gửi `JSON` lên được
+- Phải đọc docs và nghiên cứu docs thì mới có thể cải thiện được trình độ của chúng ta mà thôi
+
+- Ở phần lỗi thì chúng ta chỉ cần `new Error(error).message` -> Cái chúng ta cần là `Message` của `Error` nên là chúng ta sẽ chỉ chấm tới message của cái lỗi đó thôi là được
+
+- Vấn đề khá là hay trong buổi học về thằng Joi này là khả năng bảo mật - chính xác dữ liệu
+
+  /\*\*
+
+  - Note: mặc định chúng ta không cần phải custom message ở phía BE làm gì vì để ch8o FE tự validate và custom message phía Fe cho đẹp/
+  - Back-end chỉ cần validate đảm bảo dữ liệu chính xác, và trả về message mặc định từ thư viện là được.
+  - Quan trọng: việc validate dữ liệu BẤT BUỘC phải có ở phía back-end vì đây là điểm cuối để lưu trữ dữ liệu vào database
+  - Và thông thường trong thực tế, điều tốt nhất cho hệ thống là hãy luôn validate dữ liệu ở cả Back-end và Front-end
+    \*/
+
+- Hướng dẫn custom luôn `message` -> Vì `message` lỗi trả về rất khó để đọc và thằng `Joi` hướng dẫn `custom message` cũng rất là dị cần phải research để có thể `custom message` được chuẩn chỉnh và đẹp hơn
+
+- Cách chúng ta custom là cách chúng ta ghi đè lại `messages mặc định` của thằng `Joi` -> Nên là khi có lỗi thì chúng ta sẽ ghi đè lại `message lỗi` của thằng thư viện `Joi`
+
 ## Code tầng Controller: Điều hướng dữ liệu
 
 ## Error handling: Middleware xử lý lỗi tập trung phía Back-end
