@@ -84,6 +84,8 @@
 
 ## Code tầng Validation: Dùng Joi để validate dữ liệu
 
+- Back-end cũng phải luôn validate dữ liệu -> Điều này là tối quan trọng trong làm việc -> Back-end đương nhiên cũng phải validate dữ liệu ở trong code luôn
+
 ## Code tầng Controller: Điều hướng dữ liệu
 
 ## Error handling: Middleware xử lý lỗi tập trung phía Back-end
