@@ -5,7 +5,8 @@
  */
 
 import express from 'express'
-import { CONNECT_DB, GET_DB } from '~/config/mongodb'
+import exitHook from 'async-exit-hook'
+import { CLOSE_DB, CONNECT_DB, GET_DB } from '~/config/mongodb'
 
 // Sẽ gọi tới START_SERVER khi mà kết nối tới DB thành công
 const START_SERVER = () => {
@@ -26,6 +27,13 @@ const START_SERVER = () => {
       `3. Hello Hoang Trong Dev, Back-end Server is running successfully at Host: ${hostname} and Port: ${port}`
     )
   })
+
+  // Thực hiện các tác clean-up trước khi dừng server lại
+  exitHook(() => {
+    console.log('4. Disconnecting from MongoDB Cloud Atlas')
+    CLOSE_DB()
+    console.log('4. Disconnected from MongoDB Cloud Atlas')
+  })
 }
 
 ;(async () => {
@@ -34,6 +42,7 @@ const START_SERVER = () => {
     await CONNECT_DB()
     console.log('2. Connected to MongoDB Cloud Atlas!')
 
+    // Khởi động SERVER back-end sau khi connect database thành công
     START_SERVER()
   } catch (error) {
     console.error(error)

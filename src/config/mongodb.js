@@ -35,6 +35,11 @@ export const CONNECT_DB = async () => {
   trelloDatabaseInstance = mongoClientInstance.db(DATABASE_NAME)
 }
 
+// Đóng kết nối tới Database khi cần
+export const CLOSE_DB = async () => {
+  await mongoClientInstance.close()
+}
+
 // Function bình thường, hàm GET_DB sử dụng lại ở nhiều nơi
 // Có nhiệm vụ export ra cái Trello Database sau khi đã connect thành công tới MongoDB để có thể sử dụng ở nhiều nơi khác nhau
 // Lưu ý phải đảm bảo chỉ luôn gọi cái getDB này sau khi đã kết nối thành công tới MongoDB

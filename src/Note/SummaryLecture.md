@@ -40,10 +40,48 @@
 
 - Nó còn cách viết hay của cái `ConnectDB` để chúng ta có thể biết thêm -> Nó được gọi là IIFE -> Là biểu thức mà hàm khai báo sẽ được gọi ngay lập tức sau khi được định nghĩa -> Thường sẽ được khai báo trong một cặp dấu ngoặc đơn `(5)`
 
-## Đóng kết nối MongoDB Atlas trong dự án Back-end
+## Đóng kết nối MongoDB Atlas trong dự án Back-
+
+- Tận dụng cái `Close Connection` như thế nào một cách hợp lý trong ứng dụng Nodejs của chúng ta
+
+- Trên docs của `MongoDB` client sẽ `Close` khi bạn `finish` hoặc là `error` -> Rồi vấn đề là khi nào chúng ta sẽ `finish` `Server` và `finish` để làm gì và `error` để làm gì/
+
+- Sau 1 `APIs` thì chúng ta lại thực hiện lại thành động `Connect` tới database xong rồi lại `Close` database -> Thành động này cứ lặp đi lặp đi lại sau mỗi `APIs`
+
+- Đợt trước có dạy `MERN` rồi cũng không `Close Client` tới `cloud` -> Và nó không có vấn đề gì hết -> Tuy nhiênn sau nó vẫn sinh ra cái `Close` này
+
+- Khi mà con Server của chúng ta bị `shutdown` hay bị `crash` -> Thì chúng ta sẽ `Close Connection` của thằng `MongoDB` tại đây
+
+- Đến giải phải khi cho `clean-up` khi chúng ta dừng `server Nodejs` lại
+
+- Thu viện Async-exit-hook nó sẽ cover cho chúng ta những trường hợp như `ctrlC` các thứ và những cú pháp mà những người trện `stackOverflow` chỉ
+
+- Và thực sự là đơn giản khi phải viết một đóng code như trên stackOverflow -> Chỉ bằng cách sử dụng async-exit-hook
+
+- Trong phạm vi của START_SERVER thì chúng ta gọi exitHook -> Thì nó vẫn chạy vào đâ process.exit(0) sau đó nó chạy vào exitHook -> Nó vẫn chạy vào exitHook mục địch là chúng ta đóng cái `Connection của thằng MongoDB` tại đây
+
+- Cần cái hàm dể đóng thằng `MongoDB` lại -> Một cái hàm thứ 3 đóng kết tới Database khi cấn -> `CLOSE_DB` để đóng kết nối tới `Database`
+
+- Đây là cách chúng ta `Close Database` khi nào -> Khi chúng tá dừng thẩng ứng dụng `NodeJs` bằng `Ctrl C` chẳng hạn (khi chúng ta dừng cái terminal) lại -> Mộtt trường hợp nào đấy con BE nó chết - `crash app` hay là chúng tá chủ động chúng ta tắt nó đi -> Thì nó sẽ đi vào `exitHook` thì thằng này nó cover lại đủ các tín hiệu -> Rồi nó sẽ đóng k ết nối tới `MongoDB`
 
 ## Tổ chức biến môi trường ENV đúng cách
 
 ## Viết API với Express Router, hiểu HTTP Status Codes
 
 ## Sử dụng Postman để test API Back-end
+
+## Code tầng Validation: Dùng Joi để validate dữ liệu
+
+## Code tầng Controller: Điều hướng dữ liệu
+
+## Error handling: Middleware xử lý lỗi tập trung phía Back-end
+
+## Môi trường Dev & Production trong dự án vì sao lại quan trọng
+
+## Code tầng Service: Xử lý Logic dữ liệu theo từng dặc thù dự án
+
+## Code tầng Model: Định nghĩa Collection Schema
+
+## Hoàn thành API create - Tạo mới bản ghi vào Database
+
+## Tại sao nên chekc data ở cả Validation và Model Schema
