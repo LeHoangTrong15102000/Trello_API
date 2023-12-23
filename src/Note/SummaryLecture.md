@@ -66,6 +66,12 @@
 
 ## Tổ chức biến môi trường ENV đúng cách
 
+- Giải quyết cái biến môi trường `ENV` trong dự án của chúng ta -> Sao cho cái code của chúng ta tổ chức quản lí cái biến môi trường như thế nào để cho nó `tối ưu` về sau
+
+- Trong tương lai sẽ viết những cái script nó k hông phụ thuộc vào con `Server` đang chạy của chúng ta cả, những cái file `Script` riêng -> Nhưng cái kịch bản mà chúng ta chạy riêng, chạy jobs hoặc là fix một cái data nào đấy trong cơ sở dữ liệu -> Thì chúng ta sẽ tạo ra những cái file không ảnh hưởng đến thằng `Server` nữa.
+
+- Chúng ta không muốn phải gọi các import 'dotenv/config' trong tất cả các file có gọi đến biến môi trường nữa => Nên là chúng ta sẽ tạo ra một file/ tổ chức ra một file để lưu trữ các biến môi trường -> Để có thể nhìn trực quan được các biến môi trường song song với file `.env` của chúng ta -> Tạo ra file `environment.js` để lưu và tổ chức các biến môi trường
+
 ## Viết API với Express Router, hiểu HTTP Status Codes
 
 ## Sử dụng Postman để test API Back-end
