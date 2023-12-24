@@ -121,9 +121,23 @@
 
 ## Error handling: Middleware xử lý lỗi tập trung phía Back-end
 
-- Xử lý Error Handling tập trung với những cái lỗi trả về
+- Xử lý Error Handling tập trung với những cái lỗi trả về -> Đa phần những ứng dụng nào cũng có xử lý lỗi tập trung như này để có thể bắt được lỗi
 
-## Môi trường Dev & Production trong dự án vì sao lại quan trọng
+- Trong `expressJS` ở những chỗ `error` nếu như có những chỗ chúng ta muốn trả về lỗi -> Thì chúng ta `return error` hoặc là `next(error)` -> Thì thằng `expressJS` nó sẽ đưa về những chỗ `xử lý lỗi tập trung` ở file `Server`
+
+- Việc bây giờ là cái `middleware error` chúng ta phải viết như thế nào cho nó `hợp lý` và `phù hợp`
+
+- Tạo ra một biến `responseError` để kiểm soát các lỗi trả về -> Trước tiên trả về `statusCode`, tiếp theo là trả về một `messageError` (lát nữa sẽ học thêm về Error mặc định hoặc là ApiError) -> Tiếp theo là `error.stack` cái stack này như là một cái chuẩn kiểu để biết được - `trace(dấu vết - vết tích)` được cái lỗi của chúng ta nó đến từ đâu -> Những cái `error.stack` đôi lúc nó đúng - đôi lúc nó bị lồng nhau thì lại không đúng(đôi lúc khù khoằm) -> Nhưng mà có nó còn đỡ hơn không -> Để chúng ta thu hẹp cái `phạm vi` tìm ra lỗi trong ứng dụng
+
+- Khi đi làm sẽ có những dự án ghi lỗi vào những cái file hằng ngày, nó lưu lại `hằng ngày` xong rồi nó xoá `hàng tháng` hay `hàng tuần` tuỳ -> Để khi mà có `sự cố` xảy ra thì chúng ta `debug code` -> Để `debug code` thì chúng ta phải đọc được lỗi -> Phần lỗi này sẽ được mở rộng rất là nhiều nên là cứ thoải mái
+
+- Bây giờ vấn đề làm sao để chúng ta custom cái `statusCode` ở phần `messageError` lỗi trả về -> Sẽ custom cái `error.code` trong `NodeJS` thành cái `statusCode` của chúng ta -> Viết cái `class` kế thừa lại `class error` mặc định -> Sauu đó mở rộng ra một cái `Key` đó là `statusCode` của chúng ta
+
+- `ApiError` -> Lưu lại stackTrace để đẩy vào `ApiError` của chúng ta
+
+- Xử lý chỗ `boardValidation` -> Thì có thể lấy `error.message` hoặc là có thể lấy `new Error(error).message` thì 2 thằng này chúng ta lấy thằng nào cũng được
+
+  ## Môi trường Dev & Production trong dự án vì sao lại quan trọng
 
 ## Code tầng Service: Xử lý Logic dữ liệu theo từng dặc thù dự án
 
