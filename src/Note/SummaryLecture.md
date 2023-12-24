@@ -155,6 +155,37 @@
 
 ## Code tầng Service: Xử lý Logic dữ liệu theo từng dặc thù dự án
 
+- Tìm hiểu về tầng Service - Xử lý dữ liệu
+
+- Ở cái tầng Service này có thể sử dụng function bình thường hoặc là function bất đồng bộ -> Nhưng đa phần chúng ta còn chọc vào `database` để query dữ liệu các kiểu (bất đồng bộ) -> Nên là sử dụng `function async`
+
+- Khi đến `tầng Service` rồi thì thông thường không đây `req` hay `res` sang `tầng Service` để làm gì -> Service chính là cái tầng để chúng ta xử lý `logic` - tùy đặc thù từng function trong dự án - tùy từng chức năng -> Từ từ sẽ làm thêm `logic trong Service`
+
+- Bây giờ sẽ điều hướng từ `Controller` sang `Service` -> Bây giờ thì ở service nó cần cái gì -> Thì ở `createNewBoard` cái nó cần ở đây chính là `title` và `description` -> Và ở `Service` chúng ta không đưa cả `request`sang , chúng ta chỉ đưa dữ liệu cần sang thôi -> Về sau còn nhiều `dữ liệu khác` thì chúng ta điều hướng từ `Controller` đưa sang
+
+- Service nó có nhiệm vụ là thao tác với `Model` tạo ra các `Board` của chúng ta
+
+- Ở `Service` nếu như mà có lỗi thì chúng ta sẽ không `next()` nó về `errorMiddleware` để xử lý nữa -> Chỉ đơn giản là chúng ta `throw` ra một `error` nếu có lỗi là được -> Vì đằng nào khi mà có lỗi thì `Controller` nó sẽ điều hướng sang chỗ `error Middleware` để xử lý lỗi tập trung (đẩy hết về controller) cho nó điều hướng -> Có kết quả thì nó trả về kết quả chuẩn - còn không thì đưa về chỗ xử lý lỗi tập trung ở `error handling middleware`
+
+- Vì là xử lý dữ liệu và `Client` chỉ gửi lên cho chúng ta `title` và `description` mà thôi -> Nhưng mà giả sử trong `Model` của chúng ta chúng ta sẽ lưu thêm một số thứ khác mặc định -> Ví dụ như `title` chúng ta muốn chuyển nó về dạng `slug`
+
+  - slug là gì cứ từ từ là chúng ta sẽ rõ -> `Slug` hiểu nôm na là nó `remove` dấu đi và nó biến thành chuỗi `string` `không dấu` được nối với nhau bởi `dấu gạch` - `-`
+  - Slug là để chúng ta làm việc với `URL` của trang web
+
+  - Ngoài việc sử dụng các `formatters` đã có sẵn về `slug` thì chúng ta còn có thể sử dụng thư viện để xử lý cái `slug` này
+
+- Có những đoạn code đi làm sau này chúng ta cần phải sưu tầm lại -> để việc research trở nên dễ dàng hơn -> Cũng phải nên `research` để có thể tự học tự phát triển được nhiều thứ hơn nữa trong tương lai -> Phấn đấu để trở thành một `developer` thay vì là một `thợ code`
+
+- Cái `Slug` thì `FE` sẽ không làm vấn đề này mà `BE` chúng ta sẽ làm luôn việc đó
+
+- Và lưu ý rầng tất cả các hàm `Service` về sau đều phải có `return` -> Nếu không có return thì sẽ không có kết quả trả về cho `BoardController` -> Dĩ nhiên là sau này làm tới tầng `Model` thì còn nhiều vấn đề lắm
+
+- Sau này có thê dùng `slug` để làm URL cho con `bot` bổ sung vào để làm `SEO` cho trang web
+
+- Client chỉ gửi lên 1 2 dữ liệu thôi nhưng mà kết quả chúng ta lưu vào `DB` trả về có thể hàng chục dữ liệu là chuyện bình thường
+
+- Đến tầng `Model` chúng ta sẽ được biết như là -> Ngoài việc chúng ta validate dữ liệu ở `tầng Validation` rồi mà đến `Model` chúng ta vẫn nên `Validate`
+
 ## Code tầng Model: Định nghĩa Collection Schema
 
 ## Hoàn thành API create - Tạo mới bản ghi vào Database`
