@@ -212,4 +212,21 @@
 
 ## Hoàn thành API create - Tạo mới bản ghi vào Database
 
+- Trong hôm nay sẽ hoàn thiện các Api tạo mới `board`
+
+- Thì đến phầnn `Model` này rồi thì không cần bắt `ApiError` một cách chính xác
+  -> Thì nó hơi mắc công một tí, mắc công phải nghĩ ra `statusCode` -> Thường chúng ta sẽ để nguyên `throw new Error(error)` để chúng ta lấy được cái `stack.trace` để chúng ta biết được lỗi nó đang chạy ở đâu -> Chứ để throw error thì nó sẽ không có `stack.trace`
+
+- Nếu mà có lỗii xảy ra ở tầng `Model` hay lỗi xảy ra ở `custom Error` ở `tầng Service`
+
+- Sẽ nhận được `data` từ `Service` gửi sang -> Sau khi đã có hàm `createNew` từ `Model` rồi thì chúng ta sẽ import vào `Service` và xử lý
+
+- Tiếp theo là nó sẽ phát sinh 1 cáii vấn đề đó là -> Thông thường đối với dự án khi mà ta tạo xong 1 `bản ghi - document` vào trong `MongoDB` thì cái `_id` luôn luôn là cái mà `MongoDB` tự tạo cho chúng ta -> Tuy nhiên khi mà chúng ta tạo xong 1 `bản ghi` không nhất thiết chúng ta phải trả về toàn bộ dữ liệu trong bản ghi cho `Client` - Đôi khi chỉ cần trả giống `Postman` trả về là được - cũng có thể gửi về thông báo là tạo mới thành công cũng được -> Nhưng đa phần trong các `dự án` sau khi tạo xong thì trả về `bản ghi` đó cho FE ngay lập tức -> Để FE thực hiện các `hành động` trả ra `trình duyệt` cho người dùng
+
+  - Nên bây giờ chúng ta cần phải làm thêm `hành động` nũa dựa vào `insertedId` mà `MongoDB` trả về -> Chúng ta phải query vào `database` để lấy full cái `bản ghi` này về -> Rồi trả về cho người dùng
+
+- Thằng insertedId bản chất nó là một `new ObjectId` -> Nên là khi `findOne()` thì chúng ta cần phải truyền vào cho một `id` có kiểu là `ObjectId` -> Còn không thì thằng `MongoDB` nó sẽ không nhận biết được
+
 ## Tại sao nên check data ở cả Validation và Model Schema - Cái này quan trọng
+
+- Sẽ hiểu tại sao các giá trị `createdAt`, `updatedAt`, `_destroy` nó vẫn chưa có trong bản ghi của chúng ta -> Sẽ được giải thích cận kẽ
