@@ -115,7 +115,13 @@
 
 ## Code tầng Controller: Điều hướng dữ liệu
 
+- `Controller` như là một nơi để truyền dữ liệu đi đến các `tầng khác` để xử lý dữ liệu
+
+- Test code trong `tầng Controller` rất hay -> Thì ở `Controller` chúng ta sẽ nhận `request` -> Sau khi nhân `request` thì có rất nhiều thế loại data `req.query` , `req.params`, `req.files` `req.cookies` , `req.jwtDecoded` -> sau khi đã có được dữ liệu này rồi thì chúng ta sẽ `điều hướng dữ liệu` sang `tầng Service` -> Sau đó trả về kết quả của một `endpoint-API` ở tầng `Controller` này -> Sau khi đã đi qua `Service` rồi `Model` thì nó sẽ lấy được dữ liệu từ `Database` và trả về cho `Client - Fronend` -> Những `data mà FE cần` để xây dựng lên giao diện người dùng
+
 ## Error handling: Middleware xử lý lỗi tập trung phía Back-end
+
+- Xử lý Error Handling tập trung với những cái lỗi trả về
 
 ## Môi trường Dev & Production trong dự án vì sao lại quan trọng
 
