@@ -10,14 +10,14 @@ import { StatusCodes } from 'http-status-codes'
 
 const createNew = async (req, res, next) => {
   try {
-    console.log('Req Body', req.body)
-
+    // console.log('Req Body', req.body)
+    // throw new ApiError(StatusCodes.BAD_GATEWAY, 'HoangTrongDev test Error Server!!!')
     res.status(StatusCodes.CREATED).json({ message: 'POST from Validation: API get new boards' })
   } catch (error) {
-    console.log('Error', error)
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      errors: error.message
-    })
+    next(error)
+    // res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    //   errors: error.message
+    // })
   }
 }
 

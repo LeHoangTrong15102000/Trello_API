@@ -9,6 +9,8 @@ import exitHook from 'async-exit-hook'
 import { CLOSE_DB, CONNECT_DB } from '~/config/mongodb'
 import { env } from '~/config/environment'
 import { APIs_V1 } from '~/routes/v1'
+import { StatusCodes } from 'http-status-codes'
+import { errorHandlingMiddleware } from './middlewares/errorHandlingMiddleware'
 
 // Sẽ gọi tới START_SERVER khi mà kết nối tới DB thành công
 const START_SERVER = () => {
@@ -19,6 +21,9 @@ const START_SERVER = () => {
 
   // APIs V1
   app.use('/v1', APIs_V1)
+
+  // Middleware xử lý lỗi tập trung
+  app.use(errorHandlingMiddleware)
 
   app.listen(env.APP_PORT, env.APP_HOST, () => {
     // eslint-disable-next-line no-console
