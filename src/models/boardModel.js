@@ -15,5 +15,14 @@ const BOARD_COLLECTION_SCHEMA = Joi.object({
   description: Joi.string().required().min(10).max(255).trim().strict(),
 
   // Mặc đinh cái columnOrdeIds ban đầu sẽ là một cái mảng rỗng
-  columnOrderIds: Joi.array().items(Joi.string()).default([])
+  columnOrderIds: Joi.array().items(Joi.string()).default([]),
+
+  createAt: Joi.date().timestamp('javascript').default(Date.now()),
+  updatedAt: Joi.date().timestamp('javascript').default(null), // Mặc định nó phải là null, vì khi updated thì bên thằng Service sẽ đảm nhận xử lý và trả về
+  _destroy: Joi.boolean().default(false)
 })
+
+export const boardModel = {
+  BOARD_COLLECTION_NAME,
+  BOARD_COLLECTION_SCHEMA
+}

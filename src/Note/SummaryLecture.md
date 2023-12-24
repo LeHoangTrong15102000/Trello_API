@@ -200,6 +200,16 @@
 
 - Đoạn này `columnOrderIds: Joi.array().items(Joi.string()).default([])` nó còn liên quan đến `objectId` của `MongoDB` cơ - còn hơi dị một tí
 
+- Hiện tại `Model` chưa `validate` -> Sẽ để ở lần sau sẽ `validate`
+
+- Nhưngg mà khi ở trong MongoDB thì những thuộc tính có `Id` thường là sẽ có kiểu dữ liệu là `ObjectId` -> Nhưng mà khi thao tác với `MongoDB` thì những cái `boardId` đều phải bọc trong `ObjectId` ->
+
+- Thay vì sử dụng thư viện khác để validate cho những `Key` như thuộc tính `boardId` -> Sử dụng thưu viện bên ngoài để validate cho trường `Id` của thằng `Joi` thì chúng ta có thể sử dụng cách nó `native` hơn, thú vị hơn và hay hơn -> Là chúng ta sẽ validate chuỗi string dấy với cái `regex pattern` - `biểu thức chính quy` -> Chúng ta sẽ bắt vào cái `Rules` này để chúng ta biết được cái chuỗi string chúng ta đẩy lên có phải là một kiểu `ObjectId` hay không
+
+- Đây sẽ là cách mà chúng ta sẽ tìm kiếm và giải quyết vấn đề nảy giờ ->`How to validate Joi with ObjectId in MongoDB`
+
+- Và lưu rằng những cái liên quan tới Id kiểu này
+
 ## Hoàn thành API create - Tạo mới bản ghi vào Database
 
 ## Tại sao nên check data ở cả Validation và Model Schema - Cái này quan trọng
