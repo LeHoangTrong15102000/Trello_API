@@ -188,6 +188,18 @@
 
 ## Code tầng Model: Định nghĩa Collection Schema
 
-## Hoàn thành API create - Tạo mới bản ghi vào Database`
+- Hôm nay sẽ tạo `Model` trước ngày hôm sau sẽ đi thực hiện hành động `createNewBoard`
 
-## Tại sao nên check data ở cả Validation và Model Schema
+- Cái việc mà tạo `schema` trong `MongoDB` -> Đôi với MongodB chúng a không cần phải tọa `schema` mà có thể viết code và thêm dữ liệu vào luôn -> Nhưng biết đâu có những cái dự án mà chúng ta bi thiếu đi một vài trường như vậy thì sẽ hơi khó cho một vài bạn vừa học -> nên là chúng ta vẫn sẽ tạo `Model` ở trong dự án này mặc dù là với `MongoDB`
+
+- Sẽ vẫn tạo ra `Schema` để hiểu được cái cách mà chúng ta tổ chức dữ liệu ở trong `Database`
+
+- Việc chúng ta tổ chức dữ liệu ở bên trong `Model` thì nó cũng là một `JSON object` -> Chinh xác là JSON object rồi thì chúng ta sử dụng thư viện `Joi` để `defined` ra một cái `Schema` - `là một dạng JSON object` -> Trong `Model` vẫn là `JSON object` nhưng cái khái niệm của nó là một `Schema` - Còn trng `validation` thì vẫn như nhau thôi nhưng chúng ta đặt nó là một condition
+
+- Tại sao chúng ta lại tạo lại cái `Schema` `Model` ở tầng Model này nữa thì ở các bài tiếp theo chúng ta sẽ rõ phần này
+
+- Đoạn này `columnOrderIds: Joi.array().items(Joi.string()).default([])` nó còn liên quan đến `objectId` của `MongoDB` cơ - còn hơi dị một tí
+
+## Hoàn thành API create - Tạo mới bản ghi vào Database
+
+## Tại sao nên check data ở cả Validation và Model Schema - Cái này quan trọng
