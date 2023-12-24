@@ -137,12 +137,26 @@
 
 - Xử lý chỗ `boardValidation` -> Thì có thể lấy `error.message` hoặc là có thể lấy `new Error(error).message` thì 2 thằng này chúng ta lấy thằng nào cũng được
 
-  ## Môi trường Dev & Production trong dự án vì sao lại quan trọng
+## Môi trường Dev & Production trong dự án vì sao lại quan trọng
+
+- Thì ở phần này liên quan đến vấn đề bảo mật dữ án - những cái rất là nhỏ thôi nhưng nó liên quan đến `bảo mật code` - làm sao không để lộ `code` ra ngoài - những cái `key` trong biến môi trường
+
+- Hôm nay sẽ học biến môi trường mới -> Tuy nhiên nó đặc biệt ở chỗ là nó sẽ là môi trường `Production` và `Dev` -> Đầu tiên là sẽ cần cài đặt thư viện `cross env` để quản lí môi trường làm việc này kia
+
+- Tiếp theo chúng ta sẽ tạo ra biến môi trường để chúng ta phân biệt được là môi trường `Dev` hay là `Production` -> Biến môi trường này sẽ tạo và chạy nó trong mục `scripts` của file `package.json`
+
+- Để mà đồng bộ hết mọi môi trường thì chúng ta phải sử dụng thư viện `cross-env` -> Sử dụng `BUILD_MODE=dev` để chúng ta kiểm tra luôn ở phần `errorHandling` luôn -> Nên là chúng ta sẽ học luôn biến môi trường ở phần này -> Tại vì ở `errorHandling` có ứng dụng vào dự án thực tế của chúng ta rồi nên là sẽ học luôn
+
+- Nếu môi trường không phải là môi trường `Dev` thì chúng ta sẽ xóa cái `responseError.stack` đi và không trả về cho người dùng khi mà người dùng đang gọi tới cái `Side-Production` của chúng ta -> Nếu mà chúng ta để cái `stackTrace Error` thì họ sẽ biết phần nhiều cái cấu trúc của chúng ta -> Cái `stack` nó `show` ra rất là gõ cái `cấu trúc` thư mục của con `Back-end` của chúng ta -> Nên tốt nhất thì cái `BUILD_MODE=production` thì nên xóa đi -> Vì về sau nó không chỉ chia có mỗi môi trường `Production` không đâu -> Còn có môi trường `Beta`, `Staging`, hay môi trường riêng giành cho `Auto Test` hay `Test` > Nhưng mà cơ bản nhất sẽ là 2 môi trường là `Production` và `Development`
+
+- Cái `BUILD_MODE` chạy trong `package.json` thì nó cũng lấy từ `process.env` ra
+
+- Tóm lại ở môi trường `production` chúng ta khong show lỗi ra ở phía `Client` -> Đó là một kiến thức `bảo mật` rất `căn bản` thôi
 
 ## Code tầng Service: Xử lý Logic dữ liệu theo từng dặc thù dự án
 
 ## Code tầng Model: Định nghĩa Collection Schema
 
-## Hoàn thành API create - Tạo mới bản ghi vào Database
+## Hoàn thành API create - Tạo mới bản ghi vào Database`
 
-## Tại sao nên chekc data ở cả Validation và Model Schema
+## Tại sao nên check data ở cả Validation và Model Schema
