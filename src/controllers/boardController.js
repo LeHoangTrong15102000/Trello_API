@@ -26,6 +26,19 @@ const createNew = async (req, res, next) => {
   }
 }
 
+// Lây ra một cái board cụ thể
+const getDetails = async (req, res, next) => {
+  try {
+    const boardId = req.params.id
+    // Sau này ở khoá MERN stack Advance sẽ có thêm userId nữa để chỉ lấy board  thuộc về user đó thôi
+    const board = await boardService.getDetails(boardId)
+    return res.status(StatusCodes.OK).json(board)
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const boardController = {
-  createNew
+  createNew,
+  getDetails
 }
