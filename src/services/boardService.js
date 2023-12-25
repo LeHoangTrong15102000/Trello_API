@@ -9,6 +9,8 @@ import ApiError from '~/utils/ApiError'
 import { slugify } from '~/utils/formatters'
 import { StatusCodes } from 'http-status-codes'
 
+import cloneDeep from 'lodash/cloneDeep'
+
 const createNew = async (reqBody) => {
   try {
     // Xử lý logic
@@ -39,7 +41,17 @@ const getDetails = async (boardId) => {
       throw new ApiError(StatusCodes.NOT_FOUND, 'Board not found!!')
     }
 
-    return board
+    const responseBoard = cloneDeep(board)
+
+    // Hàm forEach không return nhưng có thể dùng biến đổi dữ liệu của mảng
+    responseBoard.columns.forEach((column) => {
+      // Cách dùng .equals này là bởi vì chúng ta hiểu ObjectId trong MongoDB có support .equals
+      // column.cards = responseBoard.cards.filter((card) => card.columnId.equals(column._id))
+      column.cards = responseBoard.cards.filter((card) => card.columnId.toString() === column._id.toString())
+    })
+    delete responseBoard.cards
+
+    return responseBoard
   } catch (error) {
     throw error
   }

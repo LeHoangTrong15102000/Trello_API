@@ -59,7 +59,7 @@ const findOneById = async (boardId) => {
 const getDetails = async (boardId) => {
   try {
     // Hôm nay hàm getDetails sẽ giống với hàm findOneById - Và sẽ update phần aggregate ở những video tới
-    return await GET_DB()
+    const result = await GET_DB()
       .collection(BOARD_COLLECTION_NAME)
       .aggregate([
         {
@@ -72,19 +72,22 @@ const getDetails = async (boardId) => {
           $lookup: {
             from: columnModel.COLUMN_COLLECTION_NAME,
             localField: '_id',
-            foreignField: 'boardId'
-            // as: 'columns'
+            foreignField: 'boardId',
+            as: 'columns'
           }
         },
         {
           $lookup: {
             from: cardModel.CARD_COLLECTION_NAME,
             localField: '_id',
-            foreignField: 'boardId'
-            // as: 'cards'
+            foreignField: 'boardId',
+            as: 'cards'
           }
         }
       ])
+      .toArray()
+
+    return result[0] || {}
   } catch (error) {
     throw new Error(error)
   }

@@ -36,7 +36,37 @@
 
   - localField: là cái `field` ở cái `Collection` hiện tại ở đây chúng ta đang làm cho cái `board` thì `localField chính là cái board` của chúng ta và ta lấy ra `_id`
 
-  - foreignField nó giống như là cái khóa ngoại cái mà chúng ta tìm đến `Collection bên column` bên column chúng ta lưu cái bản ghi `boardId` để mà chúng liên kết với thằng `board`
+  - `foreignField` nó giống như là cái khóa ngoại cái mà chúng ta tìm đến `Collection bên column` bên column chúng ta lưu cái bản ghi `boardId` để mà chúng liên kết với thằng `board`
+
+  - Thì localField bên `board` sẽ là `_id` còn `foreignField` bên đây sẽ là `boardId` -> Hiểu đơn giản là một cái là chúng ta đang đứng tại hiện tại để `query` còn 1 cái là chúng `query` từ cái `collection` khác mà chúng ta đang tìm kiếm
+
+  - Còn cuối cùng `as` output trả ra là một cái `array field` và chúng ta sẽ cho nó một cái `key` -> Ví dụ như mảng chứa các column thì cái `key` của nó sẽ là `columns`[] vì trong mảng chứa nhiều `column` -> Nó sẽ sang thằng `Collectio Column` tìm toàn bộ cái `column` nào có `boardId` là `_id` của board mà chúng ta đang đứng -> Và nó sẽ lấy những cái `column` thuộc về nó để nó trả về cho người dùng
+
+  - Tất nhiên là chúng ta có thể dùng cách khác để lấy ra `column` và `card` thuộc cái `board` đó -> Nhưng cái cách tối ưu nhất vẫn là `query tổng hợp` -> Bên dưới thằng `MongoDB` sẽ làm việc lấy dữ liệu và `transform` ra dữ liệu cho chúng ta
+
+  - Và lưu rằng phía sau `aggragate()` phải chấm `toArray()` để nó mới trả ra dữ liệu chuẩn cho chúng ta
+
+  - Và lưu rằng return về `result[0]` vì thằng `aggregate()` nó trả về một cái mảng nên là chúng ta sẽ lấy phần tử đầu tiên nếu nó có trả về giá trị -> Vì ở đây là chúng ta lấy ra một cái `board` và `_id` nó là `unique` -> Nên nếu có trả về dữ liệu thì nó cũng trả về `1 giá trị` -> Vì thằng `aggregate` nó sẽ trả về một mảng -> Nên là chắc chắn thì cứ lấy phần tử đầu tiên
+
+  - Sau này làm tính năng xoá `board` -> biến `_destroy: true` thì sẽ không `query` ra nữa
+
+- Buổi tới sẽ làm chức năng thêm `Column` và thêm `Card`
+
+- Hôm nay để mà chúng ta test trước -> Chúng ta tập trung vào cái `aggregate query` tổng hợp thì chúng tat sẽ `fake data`
+
+- Chúng ta thấy 2 thằng `Columns` nó đang nằm cùng cấpp với nhau -> Nhưng mà trong cái cấu trúc dữ liệu của chúng ta thì `cards` nằm trong `columns` -> Frontend làm một kiểu trả về và Backend làm một kiểu trả về -> Đây là một trường hợp thực tế -> Thì `FE` làm luôn cũng được -> Nhưng nếu mà tốt hơn thì `BE` làm giùm chúng ta để chúng ta đỡ hơn một tí
+
+- Cấu trúc dữ liệu này làm ở phía FE cũng được vì đây là cấu trúc đặc thù ở phía `FE` còn `BE query theo kiểu kia` trả về cho chúng ta nhanh gọn theo kiểu kia -> Còn đây chúng ta đặt vị trí của mình làm luôn cả `FE` lẫn `BE` nên là chúng ta hiểu hết được cấu trúc của `FE` và `BE`
+
+- Để làm dữ liệu cho chuẩn trả về thì chúng ta sẽ xử lý ở đâu -> Thì chúng ta sẽ xử lý ở `boardModel` cụ thể hơn là tầng `Service - boardService` -> Vì `boardModel` trả dữ liệu về cho `boardService` -> Và bây giờ chỉ cần xử lý ở `boardService` nữa là xong -> Trước khi chúng ta trả về cho `FE` thì chúng ta sẽ xử lý dữ liệu nó đi sao cho giống với cấu trúc mà phía `FE` cần.
+
+- Sử dung hàm `cloneDeep` của `lodash` để xử lý cho cấu trúc dữ liệu mà `FE` cần -> Dùng `cloneDeep` để không ảnh hưởng tới cái `board` ban đầu -> Thông thường đối với `dữ liệu biến đổi` tốt nhất là đừng để nó `ảnh hưởng` tối dữ liệu ban đầu.
+
+- Đôi lúc biến đổi dữ liệu xong ta so sánh `dữ liệu` biến đổi đó với `dữ liệu ban đầu` xem nó có thay đổi gì không
+
+- Sau khi cloneDeep cái `board` thì chúng ta tiến hành đưa `card` về đúng cái `column` của nó -> Sau khi đã lập qua và tạo ra một `cards` trong column rồi thì sau đó chúng ta sẽ xoá cái `cards` nằm c
+
+- Cách thứ 2 để so sánh mà không cần phải chuyển kiểu dữ liệu về `string` bằng cách sử dụng `toString()` nữa
 
 ## Tạo UI/UX thêm mới Column & Card trong ứng dụng Trello
 
@@ -52,7 +82,7 @@
 
 ## Fix bug kéo thả khi cần bôi đen Text bằng chuột
 
-## Hoàn thiện tích hợp kéo thả Card với API - phần 1
+## Hoàn thiện tích hợp kéo thả Card với API - phần 1z
 
 ## Hoàn thiện tích hợp kéo thả Card với API - phần 2
 
