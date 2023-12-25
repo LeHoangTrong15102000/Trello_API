@@ -1,9 +1,3 @@
-/**
- * Updated by trungquandev.com's author on August 17 2023
- * YouTube: https://youtube.com/@trungquandev
- * "A bit of fragrance clings to the hand that gives flowers!"
- */
-
 // Điều hướng dữ liệu trong ứng dụng của chúng ta
 
 import { StatusCodes } from 'http-status-codes'

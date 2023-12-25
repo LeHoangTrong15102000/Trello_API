@@ -5,16 +5,20 @@
  */
 
 import express from 'express'
+import cors from 'cors'
 import exitHook from 'async-exit-hook'
 import { CLOSE_DB, CONNECT_DB } from '~/config/mongodb'
 import { env } from '~/config/environment'
 import { APIs_V1 } from '~/routes/v1'
 import { StatusCodes } from 'http-status-codes'
 import { errorHandlingMiddleware } from './middlewares/errorHandlingMiddleware'
+import { corsOptions } from './config/cors'
 
 // Sẽ gọi tới START_SERVER khi mà kết nối tới DB thành công
 const START_SERVER = () => {
   const app = express()
+
+  app.use(cors(corsOptions))
 
   // Enable req.body json data
   app.use(express.json())
