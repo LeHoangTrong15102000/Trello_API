@@ -230,3 +230,15 @@
 ## Tại sao nên check data ở cả Validation và Model Schema - Cái này quan trọng
 
 - Sẽ hiểu tại sao các giá trị `createdAt`, `updatedAt`, `_destroy` nó vẫn chưa có trong bản ghi của chúng ta -> Sẽ được giải thích cận kẽ
+
+- Chúng ta sẽ xử lý thằng `findOneById` ở `boardModel` trước -> Nếu như thằng `insertedId` . `toString()` hoặc là sau này có thể nhận những cái `Id` từ phía `Client` gửi lên đưa `Id` lên sau đó lấy `dữ liệu` về -> Người ta đang tìm kiếm một cái `board` ngta gửi `Id` kiểu dữ liệu là `String` lên -> Cho nên kết quả tìm kiếm nó sẽ ra là `null`
+
+- Vậy thì cái cách giải quyết như nào khi mà người dùng gửi lên một cái `Id` có kiểu là `ObjectId` để lấy ra cái `board` cụ thể -> Thì cách đơn giản là chúng ta sử dụng kiểu `ObjectId` của thằng `MongoDB` -> Nếu mà truyền vào `ObjectId` rồi mà kết quả vẫn bọc vào `ObjectId` thì kết quả vẫn như vậy thằng `MongoDB` nó đã xử lý chỗ này rồi -> Vậy là xong vấn đề dùng `ObjectId` khi tìm kiếm dữ liệu
+
+- Những giá trị trong mảng `board` không có giá trị mặc định là vì khi chúng ta `createNewBoard` thì chúng ta chưa `validate` dữ liệu cho nó -> Thì cái việc `validate` ở `Model` thì không khác gì chúng ta chạy ở tầng Validate dữ liệu
+
+- Thì trước khi chúng ta gọi tới `Database` để `lưu dữ liệu` thì chúng ta sẽ `validate`
+
+- Vì vậy sẽ quay lại cái vấn đề là tại sao Validate ở `tầng Validation` rồi mà đến tầng `Model` vẫn `validate` tiếp -> Hình dùng rằng ở `Validation` thì thằng `client` nó gửi lên cái gì thì mình `validate` cái đấy trước rồi mình mới gửi qua `Controller -> Service -> Model` -> Còn validate ở `Model` nó giống như validate ở `validation` ngoài ra nó còn `validate` thêm những dữ liệu khác cho nó `chuẩn chỉnh`
+
+- Rồi cái thứ 2 ở phần `xử lý Service` -> Hình dung sau này có người mới `Join` vào dự án của chúng ta thì những người mới cái việc ngta `xử lý` những cái `logic` trong `Service` có thể không may người ta xử lý sai dữ liệu -> Ví dụ title chạy qua tầng `Validation` không có vấn đề nhưng khi nó qua đến tầng `Service` và nó bị `chỉnh sửa` lại thì đến tầng `Model` nó lại `validate` lần nữa rất `cẩn thận và chỉnh chu` trước khi chúng ta `lưu trữ` dữ liệu vào `database`
