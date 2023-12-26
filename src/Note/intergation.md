@@ -70,6 +70,8 @@
 
 ## Tạo UI/UX thêm mới Column & Card trong ứng dụng Trello
 
+- UI click vào hiển thị `Input` các thứ -> Rồi tạo `column` và `card` sau -> Để buổi tới chúng ta viết `APIs` sau
+
 ## React-Toastify: Hiển thị Flash Message chuyên nghiệp
 
 ## Viết 2 APIs tạo Column & Card trong ứng dụng Trello - phần 1
