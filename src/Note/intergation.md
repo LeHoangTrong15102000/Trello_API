@@ -76,6 +76,12 @@
 
 ## Viết 2 APIs tạo Column & Card trong ứng dụng Trello - phần 1
 
+- Buổi hôm nay chủ yếu là chúng ta `copy code` rất là nhiều
+
+- Sau này đi làm nó sẽ có những cái API mới nó được base lên từ cái API cũ -> Nên việc chúng ta `copy paste` là điều `bình thường` -> Copy paste để tiến độ công việc được nhanh hơn thôi chứ không có xấu
+
+- Khi mà tạo xong thằng bản ghi `Column` thì cái `boardId` nó phải có kiểu dũ liệu là `ObjectId` đồng thời thì thăng `columnOrderIds` nó phải được cập nhật column mới được tạo
+
 ## Viết 2 APIs tạo Column & Card trong ứng dụng Trello - phần 2
 
 ## Ghép 2 APIs tạo Column & Card vào giao diện Trello - phần 1
