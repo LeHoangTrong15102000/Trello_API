@@ -84,6 +84,18 @@
 
 ## Viết 2 APIs tạo Column & Card trong ứng dụng Trello - phần 2
 
+- Đối với những cái `Id` thì kiểu dữ liệu luôn phải là `ObjectId`
+
+- thằng `findOneAndUpdate` nó sẽ trả bản ghi thông qua kết quả nhưng mà phải chấm `.value` nó khác với thằng `aggregate` là nó trả về một `result[0]`
+
+- Ở thằng `ColumnService` trỏ tới `pushColumnOrderIds` mình chỉ nó trả về kết quả thôi chứ chúng ta không hứng kết quả -> Chỉ cần cái hàm `pushColumnOrderIds` chạy đúng là được
+
+- Ở thằng `findOneAndUpdate` ở đợt tới chúng ta cũng sẽ làm là `updateColumn` và cũng sử dụng thằng `findOneAndUpdate` này -> Và thằng này nó có một giá trị là `returnDocument` thì thằng này nó sẽ trả về một `document` mới hiểu nôm na là một `bản ghi` mới sau khi chúng ta cập nhật nếu chúng ta set `returnDocument` là `after` -> thêm cái này vào để báo với MongoDB rằng là t muốn lấy cái `bản ghi` sau khi được cập nhật
+
+  - Còn nếu để `returnDocument`: `before` nó sẽ lấy bản ghi `original(ban đầu)`
+
+- Vậy đã hoàn thành việc thêm `columnId` vào trong mảng `columnOrderIds` rồi -> Nên việc tương tự là thêm `cardId` vào trong `cardOrderIds`
+
 ## Ghép 2 APIs tạo Column & Card vào giao diện Trello - phần 1
 
 ## Ghép 2 APIs tạo Column & Card vào giao diện Trello - phần 2
