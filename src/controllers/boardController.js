@@ -23,7 +23,7 @@ const createNew = async (req, res, next) => {
 // Lây ra một cái board cụ thể
 const getDetails = async (req, res, next) => {
   try {
-    const boardId = req.params.id
+    const boardId = req.params.id // lấy ra cái `Id` từ Route
     // Sau này ở khoá MERN stack Advance sẽ có thêm userId nữa để chỉ lấy board  thuộc về user đó thôi
     const board = await boardService.getDetails(boardId)
     return res.status(StatusCodes.OK).json(board)
@@ -32,7 +32,18 @@ const getDetails = async (req, res, next) => {
   }
 }
 
+const updateDetailBoard = async (req, res, next) => {
+  try {
+    const boardId = req.params.id
+    const updatedBoard = await boardService.updateDetailBoard(boardId, req.body)
+    return res.status(StatusCodes.CREATED).json(updatedBoard)
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const boardController = {
   createNew,
-  getDetails
+  getDetails,
+  updateDetailBoard
 }

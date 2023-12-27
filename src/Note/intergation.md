@@ -102,7 +102,17 @@
 
 ## Fix bug kéo thả khi cần bôi đen Text bằng chuột
 
-## Hoàn thiện tích hợp kéo thả Card với API - phần 1z
+## Hoàn thiện tích hợp kéo thả Card với API - phần 1
+
+- Trong `dataUpdate` thì cần phải thêm trường `updatedAt: Date.now()` để cập nhật lại thời gian `update` `bản ghi board` đó -> Để khi mà `update API` thì chúng ta biết được cái `bản ghi` này `update` mới nhất vào lúc nào
+
+- CÒn nêu trong các dự án về sau thì sẽ dùng trường là `history` để lưu một cái mảng chứa các khoảng thời gian đã được update -> Đó là nâng cao còn tùy vào dự án xem có cần không nữa
+
+- Đối với phiên bản `MongoDB drive 6.0` trở về trước thì khi sử dụng hàm `findOneAndUpdate` thì kết quả trả về phải `result.value` -> Còn từ phiên bản `MongoDB 6.0` trở lên thì chỉ cần trả về `result` là được
+
+- Đối với `updateBoard` thì chúng ta không dùng `$push` mà chúng ta sẽ dùng `$set`
+
+- Rồi tiếp theo sẽ còn một cái lưu ý nữa -> Cái model của chúng ta khi mà làm chuẩn chỉnh thì không có vấn đề gì nhưng mà vẫn `care` trường hợp mà dev mới ở giao diện phía `FE` đẩy dữ liệu lên bị loạn -> Thì chúng ta vẫn `care` tới một trường hợp là chúng ta chỉ định ra một số cái `field` mà chúng ta không cho phép `update` -> Thì chúng ta cần tạo ra cái `biến` chỉ `cho phép` những trường được `update` mà thôi
 
 ## Hoàn thiện tích hợp kéo thả Card với API - phần 2
 

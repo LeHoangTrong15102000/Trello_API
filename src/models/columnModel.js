@@ -48,6 +48,7 @@ const findOneById = async (boardId) => {
   }
 }
 
+// Khi tạo mới một card thì push nó vào mảng columnOrderIds của board
 const pushCardOrderIds = async (card) => {
   try {
     //
@@ -59,7 +60,7 @@ const pushCardOrderIds = async (card) => {
         { returnDocument: 'after' }
       )
 
-    return result.value
+    return result
   } catch (error) {
     throw new Error(error)
   }

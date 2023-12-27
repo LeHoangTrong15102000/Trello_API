@@ -16,6 +16,15 @@ const createNew = async (req, res, next) => {
   }
 }
 
+const updateDetailColumn = async (req, res, next) => {
+  try {
+    //
+  } catch (error) {
+    next(error)
+  }
+}
+
 export const columnController = {
-  createNew
+  createNew,
+  updateDetailColumn
 }

@@ -40,6 +40,24 @@ const createNew = async (req, res, next) => {
   }
 }
 
+// Update Board
+const updateDetailBoard = async (req, res, next) => {
+  // Lưu ý không dùng hàm required() trong trường hợp update
+  const correctCondition = Joi.object({
+    title: Joi.string().min(3).max(50).trim().strict(),
+    description: Joi.string().min(10).max(255).trim().strict(),
+    type: Joi.string().valid(BOARD_TYPES.PUBLIC, BOARD_TYPES.PRIVATE)
+  })
+  try {
+    // Đối với trường hợp update, cho phép unknown để đẩy lên một số field mà nó không biết
+    await correctCondition.validateAsync(req.body, { abortEarly: false, allowUnknown: true })
+    next()
+  } catch (error) {
+    next(new ApiError(StatusCodes.UNPROCESSABLE_ENTITY, new Error(error).message))
+  }
+}
+
 export const boardValidation = {
-  createNew
+  createNew,
+  updateDetailBoard
 }
