@@ -114,6 +114,11 @@
 
 - Rồi tiếp theo sẽ còn một cái lưu ý nữa -> Cái model của chúng ta khi mà làm chuẩn chỉnh thì không có vấn đề gì nhưng mà vẫn `care` trường hợp mà dev mới ở giao diện phía `FE` đẩy dữ liệu lên bị loạn -> Thì chúng ta vẫn `care` tới một trường hợp là chúng ta chỉ định ra một số cái `field` mà chúng ta không cho phép `update` -> Thì chúng ta cần tạo ra cái `biến` chỉ `cho phép` những trường được `update` mà thôi
 
+- Ở `updateColumn` thì không cần trường `required()` -> Vì update dữ liệu thì không cần phải có `required()` ở phần `Validate` làm gì
+- Do column vẫn còn nằm trong một board cụ thể nên không cần phải validate cái `boardId` làm gì chỉ khi nào muốn di chuyển `column` sang một cái `board` khác thì mới cần `validate boardId`
+
+- Đã `clear` tại sao khi kéo thả card ban đầu thì nó lại bị lỗi một lần -> Còn các lần sau
+
 ## Hoàn thiện tích hợp kéo thả Card với API - phần 2
 
 ## Kỹ năng Debug gỡ lỗi quan trọng của lập trình viên

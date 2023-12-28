@@ -29,6 +29,7 @@ const BOARD_COLLECTION_SCHEMA = Joi.object({
   _destroy: Joi.boolean().default(false)
 })
 
+// Chỉ định những trường không được update từ phía BE, Nếu Client có gửi hết bản ghi
 const INVALID_UPDATE_FIELDS = ['_id', 'createdAt']
 
 const validateBeforeCreate = async (data) => {
@@ -115,6 +116,13 @@ const pushColumnOrderIds = async (column) => {
 
 // Update lại mảng columnOrderIds khi mà chúng ta kéo thả các column
 const updateBoard = async (boardId, updateData) => {
+  // Lọc bớt những trường không cho phép cập nhật
+  Object.keys(updateData).forEach((fieldName) => {
+    if (INVALID_UPDATE_FIELDS.includes(fieldName)) {
+      delete updateData[fieldName]
+    }
+  })
+
   try {
     const result = await GET_DB()
       .collection(BOARD_COLLECTION_NAME)
