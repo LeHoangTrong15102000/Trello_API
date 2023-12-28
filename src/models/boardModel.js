@@ -1,9 +1,3 @@
-/**
- * Updated by trungquandev.com's author on August 17 2023
- * YouTube: https://youtube.com/@trungquandev
- * "A bit of fragrance clings to the hand that gives flowers!"
- */
-
 import Joi from 'joi'
 import { ObjectId } from 'mongodb'
 
@@ -123,6 +117,36 @@ const updateBoard = async (boardId, updateData) => {
     }
   })
 
+  // Phải cập nhật chỗ này luôn
+  if (updateData.columnOrderIds) {
+    updateData.columnOrderIds = updateData.columnOrderIds.map((id) => new ObjectId(id))
+  }
+
+  try {
+    const result = await GET_DB()
+      .collection(BOARD_COLLECTION_NAME)
+      .findOneAndUpdate(
+        {
+          _id: new ObjectId(boardId)
+        },
+        { $set: updateData },
+        { returnDocument: 'after' }
+      )
+
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const moveCardToDifferentColumns = async (boardId, updateData) => {
+  // Lọc bớt những trường không cho phép cập nhật
+  Object.keys(updateData).forEach((fieldName) => {
+    if (INVALID_UPDATE_FIELDS.includes(fieldName)) {
+      delete updateData[fieldName]
+    }
+  })
+
   try {
     const result = await GET_DB()
       .collection(BOARD_COLLECTION_NAME)
@@ -147,5 +171,6 @@ export const boardModel = {
   findOneById,
   getDetails,
   pushColumnOrderIds,
-  updateBoard
+  updateBoard,
+  moveCardToDifferentColumns
 }

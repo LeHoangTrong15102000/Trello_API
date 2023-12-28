@@ -121,6 +121,16 @@
 
 ## Hoàn thiện tích hợp kéo thả Card với API - phần 2
 
+- Bắt buộc phải có các `keys` từ phía FE gửi lên thì chúng ta mới cho nó chạy cái API `moveCardToDifferentColumns` còn không thì không chạy -> Nên trong hàm `moveCardToDifferentColumns` chúng ta sẽ validate nó thật kĩ ở `boardValidation`
+
+- Bước đầu tiên là gọi tới hàm `UpdateColumn` trong `ColumnService` để cập nhật lại `cardOrderIds` khi mà kéo `card` trong cùng một `column`
+
+- Cái `reqBody.nextColumnId` chúng ta đẩy lên là một giá trị string -> Thì lúc này nó đẩy lên giá trị là string nhưng bản chất chúng ta cần ở dưới MongoDB là một `ObjectId`
+
+- Nói chúng cứ liên quan đến string và ObjectId thì phải `convert` hết sang `ObjectId` để cho phù hợp với kiểu dữ liệu của `MongoDB`
+
+- Tuy nhiên khi kéo `card` cuối cùng của một cái column đi chỗ khác thì nó sẽ bị `lỗi 422` -> Vấn đề này sẽ xử lý ở những buổi tiếp theo -> Vì lúc này khi kéo t hì nó rơi vào cái `Rules` của chúng ta -> Là cái `Rules` mà chúng ta bắt lỗi cho nó trước khi đưa `dữ liệu` lên `server`
+
 ## Kỹ năng Debug gỡ lỗi quan trọng của lập trình viên
 
 ## Xoá Column và Card, code chi tiết từ FE tới BE
