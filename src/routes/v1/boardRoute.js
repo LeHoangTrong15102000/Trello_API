@@ -1,9 +1,3 @@
-/**
- * Updated by trungquandev.com's author on August 17 2023
- * YouTube: https://youtube.com/@trungquandev
- * "A bit of fragrance clings to the hand that gives flowers!"
- */
-
 import express from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { boardController } from '~/controllers/boardController'
@@ -20,6 +14,11 @@ Router.route('/')
 Router.route('/:id')
   .get(boardController.getDetails)
   .put(boardValidation.updateDetailBoard, boardController.updateDetailBoard)
+
+Router.route('/supports/moving_cards').put(
+  boardValidation.moveCardToDifferentColumns,
+  boardController.moveCardToDifferentColumns
+)
 
 // Viết endpoint cập nhật lại board khi thay đổi vị trí các column
 
