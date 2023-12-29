@@ -149,6 +149,10 @@
 
 ## Xoá ColumnId trong Board - phần bổ sung
 
+- Thì ở đay chúng ta gặp một cái khó là chỉ có truyền lên columnId -> Nhưng chúng ta sẽ có một cách không cần bên client nữa chỉ cần FE gửi lên `columnId` là được
+
+- Dựa vào columnId để tìm ra `column` đấy trước rồi khi có column rồi thì chúng ta sẽ thực hiện các hành động `xóa column` `xóa card` hay là xóa `columnOrderIds`
+
 ## Deploy miễn phí NodeJS Back-end APIs lên Render
 
 ## Deploy miễn phí ReactJS Front-end lên Vercel

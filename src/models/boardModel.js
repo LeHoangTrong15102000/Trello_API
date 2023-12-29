@@ -164,6 +164,7 @@ const moveCardToDifferentColumns = async (boardId, updateData) => {
   }
 }
 
+// Lấy phần tử columnId ra khỏi mảng columnOrderIds
 // Dùng pull trong mongodb ở trường hợp này để lấy một phần tử ra khỏi mảng rồi xóa nó đi
 const pullColumnOrderIds = async (column) => {
   try {

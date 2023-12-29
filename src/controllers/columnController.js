@@ -27,7 +27,7 @@ const updateDetailColumn = async (req, res, next) => {
   }
 }
 
-const deleteDetailColumn = async (res, req, next) => {
+const deleteDetailColumn = async (req, res, next) => {
   try {
     const columnId = req.params.id
     const result = await columnService.deleteDetailColumn(columnId)

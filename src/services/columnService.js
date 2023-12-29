@@ -3,6 +3,9 @@ import { StatusCodes } from 'http-status-codes'
 import { boardModel } from '~/models/boardModel'
 import { cardModel } from '~/models/cardModel'
 
+import { ObjectId } from 'mongodb'
+import ApiError from '~/utils/ApiError'
+
 const createNew = async (reqBody) => {
   try {
     const newColumn = {
@@ -41,6 +44,12 @@ const updateDetailColumn = async (columnId, reqBody) => {
 }
 
 const deleteDetailColumn = async (columnId) => {
+  // Tìm column dựa vào columnId của FE gửi lên rồi  mới thực hiện hành động xóa column - xóa card - update columnOrderIds
+  const targetColumn = await columnModel.findOneById(columnId)
+
+  if (!targetColumn) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Column not found')
+  }
   try {
     // Xóa column
     await columnModel.deleteOneById(columnId)
@@ -49,7 +58,7 @@ const deleteDetailColumn = async (columnId) => {
     await cardModel.deleteManyByColumnId(columnId)
 
     // Cập nhật lại mảng columnOrderIds trong collection boards của chúng ta
-    await boardModel.pullColumnOrderIds(columnId)
+    await boardModel.pullColumnOrderIds(targetColumn)
 
     return { deleteResult: 'Column and its Cards delete successfully!' }
   } catch (error) {
