@@ -1,6 +1,7 @@
 import { columnModel } from '~/models/columnModel'
 import { StatusCodes } from 'http-status-codes'
 import { boardModel } from '~/models/boardModel'
+import { cardModel } from '~/models/cardModel'
 
 const createNew = async (reqBody) => {
   try {
@@ -39,7 +40,22 @@ const updateDetailColumn = async (columnId, reqBody) => {
   }
 }
 
+const deleteDetailColumn = async (columnId) => {
+  try {
+    // Xóa column
+    await columnModel.deleteColumn()
+
+    // Xóa card
+    await cardModel.deleteColumn()
+
+    return { deleteResult: 'Column and its Cards delete successfully!' }
+  } catch (error) {
+    throw error
+  }
+}
+
 export const columnService = {
   createNew,
-  updateDetailColumn
+  updateDetailColumn,
+  deleteDetailColumn
 }

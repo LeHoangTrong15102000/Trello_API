@@ -137,6 +137,10 @@
 
 ## Xoá Column và Card, code chi tiết từ FE tới BE
 
+- Chỉ viết logic code ở file MOdel khi mà nó cần phải đi vào collection của cái model của nó để cập nhật thì ghi vào, còn nếu nó đi vào collection cảu cái Model khác thì không cần
+
+- Phải cho dòng thông báo kỹ hơn một tí để cho Fe hiển thị ra
+
 ## Xoá ColumnId trong Board - phần bổ sung
 
 ## Deploy miễn phí NodeJS Back-end APIs lên Render

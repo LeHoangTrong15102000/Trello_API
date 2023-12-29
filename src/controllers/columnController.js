@@ -19,9 +19,20 @@ const createNew = async (req, res, next) => {
 const updateDetailColumn = async (req, res, next) => {
   try {
     const columnId = req.params.id
-    const updatedColumn = await columnService.updateDetailColumn(columnId, req.body)
+    const updatedColumn = await columnService.updateDetailColumn(columnId)
 
     res.status(StatusCodes.CREATED).json(updatedColumn)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const deleteDetailColumn = async (res, req, next) => {
+  try {
+    const columnId = req.params.id
+    const result = await columnService.deleteDetailColumn(columnId)
+
+    res.status(StatusCodes.CREATED).json(result)
   } catch (error) {
     next(error)
   }
@@ -37,5 +48,6 @@ const updateDetailColumn = async (req, res, next) => {
 
 export const columnController = {
   createNew,
-  updateDetailColumn
+  updateDetailColumn,
+  deleteDetailColumn
 }
