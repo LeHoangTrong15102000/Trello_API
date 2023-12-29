@@ -32,7 +32,7 @@ const deleteDetailColumn = async (res, req, next) => {
     const columnId = req.params.id
     const result = await columnService.deleteDetailColumn(columnId)
 
-    res.status(StatusCodes.CREATED).json(result)
+    res.status(StatusCodes.OK).json(result)
   } catch (error) {
     next(error)
   }

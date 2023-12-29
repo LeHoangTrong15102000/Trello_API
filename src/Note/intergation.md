@@ -141,6 +141,12 @@
 
 - Phải cho dòng thông báo kỹ hơn một tí để cho Fe hiển thị ra
 
+- Ở CardModel khi xóa thay vì là hàm `deleteOne` chúng ta sẽ sử dụng `deleteMany`
+
+- Phải luôn để đúng tham số cho cái thằng `requestHandler`
+
+- Đương nhiên khi xóa xong thì phải chú ý tới `deleteCount`
+
 ## Xoá ColumnId trong Board - phần bổ sung
 
 ## Deploy miễn phí NodeJS Back-end APIs lên Render

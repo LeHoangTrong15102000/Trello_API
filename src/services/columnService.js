@@ -43,10 +43,13 @@ const updateDetailColumn = async (columnId, reqBody) => {
 const deleteDetailColumn = async (columnId) => {
   try {
     // Xóa column
-    await columnModel.deleteColumn()
+    await columnModel.deleteOneById(columnId)
 
     // Xóa card
-    await cardModel.deleteColumn()
+    await cardModel.deleteManyByColumnId(columnId)
+
+    // Cập nhật lại mảng columnOrderIds trong collection boards của chúng ta
+    await boardModel.pullColumnOrderIds(columnId)
 
     return { deleteResult: 'Column and its Cards delete successfully!' }
   } catch (error) {

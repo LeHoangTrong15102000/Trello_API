@@ -9,6 +9,7 @@ const createNew = async (reqBody) => {
       ...reqBody
     }
     const createdCard = await cardModel.createNew(newCard)
+    // Sau khi tạo cái card xong thì lấy ra object card đó và push vòa cardOrderIds
     const getNewCard = await cardModel.findOneById(createdCard.insertedId)
 
     if (getNewCard) await columnModel.pushCardOrderIds(getNewCard)

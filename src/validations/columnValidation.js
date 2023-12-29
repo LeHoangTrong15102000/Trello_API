@@ -21,7 +21,7 @@ const createNew = async (req, res, next) => {
   }
 }
 
-const updateColumnDetail = async (res, req, next) => {
+const updateColumnDetail = async (req, res, next) => {
   const correctCondition = Joi.object({
     // boardId: Joi.string().pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE),
     title: Joi.string().min(3).max(50).trim().strict(),
@@ -40,7 +40,7 @@ const updateColumnDetail = async (res, req, next) => {
   }
 }
 
-const deleteDetailColumn = async (res, req, next) => {
+const deleteDetailColumn = async (req, res, next) => {
   const correctCondition = Joi.object({
     id: Joi.string().required().pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE)
   })
