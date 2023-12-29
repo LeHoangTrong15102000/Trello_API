@@ -133,6 +133,8 @@
 
 ## Kỹ năng Debug gỡ lỗi quan trọng của lập trình viên
 
+- Sẽ fix các bug buổi trước cũng như là chia sẻ kinh nghiệm khi đi làm thực tế -> Đó là kỹ năng `debug` 1 kỹ năng cực kì quan trong trong lúc đi làm
+
 ## Xoá Column và Card, code chi tiết từ FE tới BE
 
 ## Xoá ColumnId trong Board - phần bổ sung
