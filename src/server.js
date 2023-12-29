@@ -29,13 +29,22 @@ const START_SERVER = () => {
   // Middleware xử lý lỗi tập trung
   app.use(errorHandlingMiddleware)
 
-  app.listen(env.APP_PORT, env.APP_HOST, () => {
-    // eslint-disable-next-line no-console
-    console.log(
-      `3. Hello ${env.AUTHOR}, Back-end Server is running successfully at Host: ${env.APP_HOST} and Port: ${env.APP_PORT}`
-    )
-  })
-
+  if (env.BUILD_MODE === 'production') {
+    // Hiện tại chỉ có 2 môi trường này thôi
+    app.listen(process.env.PORT, () => {
+      // eslint-disable-next-line no-console
+      console.log(
+        `3. Production: Hello ${env.AUTHOR}, Back-end Server is running successfully Port: ${env.LOCAL_DEV_APP_PORT}`
+      )
+    })
+  } else {
+    app.listen(env.LOCAL_DEV_APP_PORT, env.LOCAL_DEV_APP_HOST, () => {
+      // eslint-disable-next-line no-console
+      console.log(
+        `3. Local DEV: Hello ${env.AUTHOR}, Back-end Server is running successfully at Host: ${env.LOCAL_DEV_APP_HOST} and Port: ${env.LOCAL_DEV_APP_PORT}`
+      )
+    })
+  }
   // Thực hiện các tác clean-up trước khi dừng server lại
   exitHook(() => {
     console.log('4. Server is shutting down...')
