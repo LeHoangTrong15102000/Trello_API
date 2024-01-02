@@ -16,10 +16,11 @@ const createNew = async (req, res, next) => {
   }
 }
 
+// Update Detail Column ->  Cụ thể là card trong column
 const updateDetailColumn = async (req, res, next) => {
   try {
     const columnId = req.params.id
-    const updatedColumn = await columnService.updateDetailColumn(columnId)
+    const updatedColumn = await columnService.updateDetailColumn(columnId, req.body)
 
     res.status(StatusCodes.CREATED).json(updatedColumn)
   } catch (error) {

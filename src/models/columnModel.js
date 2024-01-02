@@ -69,6 +69,7 @@ const pushCardOrderIds = async (card) => {
   }
 }
 
+// Update lại column khi mà kéo card
 const updateColumn = async (columnId, updateData) => {
   Object.keys(updateData).forEach((fieldName) => {
     if (INVALID_UPDATE_FIELDS.includes(fieldName)) {
