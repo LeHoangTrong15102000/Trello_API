@@ -1,21 +1,30 @@
+/**
+ * Updated by trungquandev.com's author on August 17 2023
+ * YouTube: https://youtube.com/@trungquandev
+ * "A bit of fragrance clings to the hand that gives flowers!"
+ */
 import { StatusCodes } from 'http-status-codes'
 import { cardService } from '~/services/cardService'
 
 const createNew = async (req, res, next) => {
   try {
-    // Điều hướng dữ liệu sang tầng service
     const createdCard = await cardService.createNew(req.body)
-
-    // throw new ApiError(StatusCodes.BAD_GATEWAY, 'HoangTrongDev test Error Server!!!')
     res.status(StatusCodes.CREATED).json(createdCard)
-  } catch (error) {
-    next(error)
-    // res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-    //   errors: error.message
-    // })
-  }
+  } catch (error) { next(error) }
+}
+
+const update = async (req, res, next) => {
+  try {
+    const cardId = req.params.id
+    const cardCoverFile = req.file
+    const userInfo = req.jwtDecoded
+    const updatedCard = await cardService.update(cardId, req.body, cardCoverFile, userInfo)
+
+    res.status(StatusCodes.OK).json(updatedCard)
+  } catch (error) { next(error) }
 }
 
 export const cardController = {
-  createNew
+  createNew,
+  update
 }

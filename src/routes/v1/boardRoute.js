@@ -1,25 +1,25 @@
+/**
+ * Updated by trungquandev.com's author on August 17 2023
+ * YouTube: https://youtube.com/@trungquandev
+ * "A bit of fragrance clings to the hand that gives flowers!"
+ */
 import express from 'express'
-import { StatusCodes } from 'http-status-codes'
-import { boardController } from '~/controllers/boardController'
 import { boardValidation } from '~/validations/boardValidation'
+import { boardController } from '~/controllers/boardController'
+import { authMiddleware } from '~/middlewares/authMiddleware'
 
 const Router = express.Router()
 
 Router.route('/')
-  .get((req, res) => {
-    res.status(StatusCodes.OK).json({ message: 'GET: API get list boards' })
-  })
-  .post(boardValidation.createNew, boardController.createNew)
+  .get(authMiddleware.isAuthorized, boardController.getBoards)
+  .post(authMiddleware.isAuthorized, boardValidation.createNew, boardController.createNew)
 
 Router.route('/:id')
-  .get(boardController.getDetails)
-  .put(boardValidation.updateDetailBoard, boardController.updateDetailBoard)
+  .get(authMiddleware.isAuthorized, boardController.getDetails)
+  .put(authMiddleware.isAuthorized, boardValidation.update, boardController.update)
 
-Router.route('/supports/moving_cards').put(
-  boardValidation.moveCardToDifferentColumns,
-  boardController.moveCardToDifferentColumns
-)
-
-// Viết endpoint cập nhật lại board khi thay đổi vị trí các column
+// API hỗ trợ việc di chuyển card giữa các column khác nhau trong một board
+Router.route('/supports/moving_card')
+  .put(authMiddleware.isAuthorized, boardValidation.moveCardToDifferentColumn, boardController.moveCardToDifferentColumn)
 
 export const boardRoute = Router

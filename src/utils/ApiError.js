@@ -3,7 +3,7 @@
  * YouTube: https://youtube.com/@trungquandev
  * "A bit of fragrance clings to the hand that gives flowers!"
  * NOTE: (Muốn hiểu rõ hơn về code trong file này thì vui lòng xem video 54 trong bộ MERN Stack trên kênh Youtube của mình.)
- */
+*/
 
 /**
  * Định nghĩa riêng một Class ApiError kế thừa class Error sẵn (điều này cần thiết và là Best Practice vì class Error nó là class built-in sẵn)
@@ -20,7 +20,7 @@ class ApiError extends Error {
     // Gán thêm http status code của chúng ta ở đây
     this.statusCode = statusCode
 
-    // Ghi lại Stack Trace (dấu vết ngăn xếp) để thuận tiện cho việc debug
+    // Ghi lại Stack Trace (dấu vết ngăn xếp) để thuận tiện cho việc Debug - gỡ lỗi
     Error.captureStackTrace(this, this.constructor)
   }
 }

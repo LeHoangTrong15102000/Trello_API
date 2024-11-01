@@ -3,12 +3,10 @@
  * YouTube: https://youtube.com/@trungquandev
  * "A bit of fragrance clings to the hand that gives flowers!"
  */
-
-// Cái jsconfig.json là nó dùng riêng cho việc chúng ta sử dụng với vscode
 {
   "compilerOptions": {
     "paths": {
-      "~/*": ["./src/*"]
-    }
+      "~/*": ["./src/*"],
+    },
   }
 }
