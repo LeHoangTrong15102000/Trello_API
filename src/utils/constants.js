@@ -10,7 +10,8 @@ export const WHITELIST_DOMAINS = [
   // 'http://localhost:5173' // Không cần localhost nữa vì ở file config/cors đã luôn luôn cho phép môi trường dev (env.BUILD_MODE === 'dev')
 
   // Lưu ý: Đây là domain ví dụ sau khi Deploy Production (xem video 75 và video 76 để hiểu rõ kiến thức phần này, còn hiện tại mình đã xóa domain này rồi, đừng cố truy cập làm gì =))
-  'https://trello-web-mu.vercel.app'
+  'https://trello-web-mu.vercel.app',
+  'https://trello-clone-myproject.vercel.app'
 ]
 
 export const BOARD_TYPES = {
@@ -18,7 +19,8 @@ export const BOARD_TYPES = {
   PRIVATE: 'private'
 }
 
-export const WEBSITE_DOMAIN = (env.BUILD_MODE === 'production') ? env.WEBSITE_DOMAIN_PRODUCTION : env.WEBSITE_DOMAIN_DEVELOPMENT
+export const WEBSITE_DOMAIN =
+  env.BUILD_MODE === 'production' ? env.WEBSITE_DOMAIN_PRODUCTION : env.WEBSITE_DOMAIN_DEVELOPMENT
 
 export const DEFAULT_PAGE = 1
 export const DEFAULT_ITEMS_PER_PAGE = 12

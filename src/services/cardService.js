@@ -23,7 +23,9 @@ const createNew = async (reqBody) => {
     }
 
     return getNewCard
-  } catch (error) { throw error }
+  } catch (error) {
+    throw error
+  }
 }
 
 const update = async (cardId, reqBody, cardCoverFile, userInfo) => {
@@ -55,9 +57,10 @@ const update = async (cardId, reqBody, cardCoverFile, userInfo) => {
       updatedCard = await cardModel.update(cardId, updateData)
     }
 
-
     return updatedCard
-  } catch (error) { throw error }
+  } catch (error) {
+    throw error
+  }
 }
 
 export const cardService = {
